@@ -5,5 +5,5 @@ Extraída do livro [_Programação Web com Node.js - Luiz Tools_ ](https://www.a
 
  
  My-Calc
- Nome da Equipe : Thiago dos Santos, Jonata, Arthur
+ Nome da Equipe : Thiago dos Santos, Jonata, Arthur Lucas
  link do Heroku : https://afternoon-cliffs-00954.herokuapp.com/
