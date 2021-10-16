@@ -1,83 +1,161 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Calculadora</title>
     <meta charset="utf-8" />
-  </head>
-  <body onkeypress="manipularTeclado()">
-    <h2 align="center" >Calculadora</h2>
-      <table  align="center" cellpadding="4" bgcolor="#A9A9A9">
-          <tr>
-              <td colspan="6"><input type="text" id="display" value="0" disabled></td>
-          </tr>
-
-          <tr>
-            <td><input type="button" style="width: 25px; height: 25px;" value="(" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value=")" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="%" onclick="atualizarDisplay(this)" /></td>  
-            <td><input type="button" style="width: 25px; height: 25px;" value="c" onclick="limparDisplay()" /></td>
-        </tr>
-          <tr>
-            <td><input type="button" style="width: 25px; height: 25px;" value="7" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="8" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="9" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="/" onclick="atualizarOperacao(this)" /></td>
-            
-        </tr>
-        <tr>
-            <td><input type="button" style="width: 25px; height: 25px;" value="4" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="5" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="6" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="*" onclick="atualizarOperacao(this)" /></td>
-            
-        </tr>
-        <tr>
-            <td><input type="button" style="width: 25px; height: 25px;" value="1" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="2" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="3" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="-" onclick="atualizarOperacao(this)" /></td>
-        </tr>
-        <tr>
-            <td><input type="button" style="width: 25px; height: 25px;" value="." onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;" value="0" onclick="atualizarDisplay(this)" /></td>
-            <td><input type="button" style="background-color:rgb(66, 85, 252); border-color:rgb(54, 54, 54); color:rgb(255, 255, 255);width: 25px; height: 25px;" value="=" onclick="calcularOperacao()" /></td>
-            <td><input type="button" style="width: 25px; height: 25px;"  value="+" onclick="atualizarOperacao(this)" /></td>
-        </tr>
-      </table>
-      <script>
-        function atualizarDisplay(btn){
-            const display = document.getElementById('display');
-            if(display.value.length === 9) return;
-            if(display.value === '0') display.value = btn.value;
-            else display.value += btn.value;
+<style> table{
+    text-align: center;
+    margin: auto;
+    padding: 25px;
+}
+.botao{
+    background-color: rgb(114, 141, 214);
+    font-size: 14px;
+margin: auto;
+width: 50px;
+height: 25px;
+}
+body {
+background-color:rgb(246, 247, 252)
+}
+.calculator {
+            position: absolute;
+            background-color:  #CCCCCC;
+top: 20%;
+left: 50%;
+transform: translate(-50%, -50%);
+border: 15px;
+padding: 20px;
         }
+#display {
+width: 300px;
+height: 20px;
+text-align: right;
+background-color: #e7e6e6;
+border: 3px solid #e7e6e6;
+font-size: 18px;
+left: 2px;
+top: 2px;
+color: black;
+}
+.btnNum{
+color: black;
+background-color: #e7e6e6;
+font-size: 14px;
+margin: auto;
+width: 50px;
+height: 25px;
+}
 
-        function limparDisplay(){
-            document.getElementById('display').value = '0';
-        }
 
-        var operador = ''
-        var valor1 = 0
-        function atualizarOperacao(btn){
-            const display = document.getElementById('display');
-            operador = btn.value;
-            valor1 = parseInt(display.value);
-            display.value = '0';
-        }
+</style>
+</head>
+<body>
+<form name="sci-calc">
+<table class="calculator" cellspacing="0" cellpadding="3">
+<tr>
+<td colspan="5"><input id="display" name="display" value="0" size="28" maxlength="25"></td>
+</tr>
 
-        function calcularOperacao(){
-            const display = document.getElementById('display');
-            const valor2 = parseInt(display.value);
-            valor1 = eval(valor1+operador+valor2);
-            display.value = valor1;
-            operador = '';
-        }       
+<tr>
 
-        function manipularTeclado(){
-            if(/[0-9]/.test(event.key))
-                atualizarDisplay({value: event.key});
-        }
-    </script>
+    
+    <td><input type="button" class="btnNum" name="btnOpps" value="√" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
+    <td><input type="button" class="btnNum" value="x&sup2" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
+    <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
+    <td><input type="button" class="btnNum" value="%" onclick=" percent(this.form.display)"></td>
+    
+</tr>
 
-  </body>
+   <tr>
+    <td><input type="button" class="btnNum" value="7" onclick="addChar(this.form.display, '7')"></td>
+    <td><input type="button" class="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
+    <td><input type="button" class="btnNum"  value="9" onclick="addChar(this.form.display, '9')"></td>
+    <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
+    <td><input type="button" class="btnNum" name="btnTop" value="Del" onclick="deleteChar(this.form.display)"></td>
+    
+</tr>
+
+<tr>
+<td><input type="button" class="btnNum" value="4" onclick="addChar(this.form.display, '4')"></td>
+<td><input type="button" class="btnNum" value="5" onclick="addChar(this.form.display, '5')"></td>
+<td><input type="button" class="btnNum" value="6" onclick="addChar(this.form.display, '6')"></td>
+<td><input type="button" class="btnNum" value="*" onclick="addChar(this.form.display, '*')"></td>
+
+</tr>
+
+<tr>
+    <td><input type="button" class="btnNum" value="1" onclick="addChar(this.form.display, '1')"></td>
+    <td><input type="button" class="btnNum" value="2" onclick="addChar(this.form.display, '2')"></td>
+    <td><input type="button" class="btnNum" value="3" onclick="addChar(this.form.display, '3')"></td>
+    <td><input type="button" class="btnNum" value="-" onclick="addChar(this.form.display, '-')"></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" class="btnNum" value="0" onclick="addChar(this.form.display, '0')"></td>
+        <td><input type="button" class="btnNum" value="." onclick="addChar(this.form.display, '.')"></td>
+        <td rowspan="5"><input type="button" class="botao" value= "=" onclick="if(checkNum(this.form.display.value)) { compute(this.form) }"></td>
+        <td><input type="button" class="btnNum" value="+" onclick="addChar(this.form.display, '+')"></td>
+    </tr>
+
+    <tr>
+               
+        <td><input type="button" class="btnNum" value="(" onclick="addChar(this.form.display, '(')"></td>
+        <td><input type="button" class="btnNum" value=")" onclick="addChar(this.form.display,')')"></td>
+    </tr>
+   
+
+</table>
+</form>
+<script>
+
+function addChar(input, character) {
+if(input.value == null || input.value == "0")
+input.value = character
+else
+input.value += character
+}
+
+function deleteChar(input) {
+input.value = input.value.substring(0, input.value.length - 1)
+}
+
+function percent(input) {
+input.value =  input.value /100;
+}
+
+function compute(form) {
+form.display.value = eval(form.display.value);
+}
+
+function square(form) {
+form.display.value = eval(form.display.value) * eval(form.display.value)
+}
+
+function sqrt(form) {
+form.display.value = Math.sqrt(form.display.value);
+}
+
+function checkNum(str) {
+for (var i = 0; i < str.length; i++) {
+var ch = str.charAt(i);
+if (ch < "0" || ch > "9") {
+if (ch != "/" && ch != "*" && ch != "+" && ch != "-" && ch != "."
+&& ch != "(" && ch!= ")" && ch != "%") {
+alert("invalid entry!")
+return false
+}
+}
+}
+return true
+}
+
+
+
+</script>
+</body>
 </html>
+
+
+
+   
