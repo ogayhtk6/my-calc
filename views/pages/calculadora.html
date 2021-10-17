@@ -13,7 +13,7 @@
     font-size: 14px;
 margin: auto;
 width: 50px;
-height: 25px;
+height: 60px;
 }
 body {
 background-color:rgb(246, 247, 252)
@@ -64,7 +64,8 @@ height: 25px;
     <td><input type="button" class="btnNum" value="x&sup2" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
     <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
     <td><input type="button" class="btnNum" value="%" onclick=" percent(this.form.display)"></td>
-    
+    <td><input type="button" class="btnNum" value="C" id="btLimpar"></td>
+
 </tr>
 
    <tr>
@@ -72,7 +73,6 @@ height: 25px;
     <td><input type="button" class="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
     <td><input type="button" class="btnNum"  value="9" onclick="addChar(this.form.display, '9')"></td>
     <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
-    <td><input type="button" class="btnNum" name="btnTop" value="Del" onclick="deleteChar(this.form.display)"></td>
     
 </tr>
 
@@ -102,12 +102,18 @@ height: 25px;
                
         <td><input type="button" class="btnNum" value="(" onclick="addChar(this.form.display, '(')"></td>
         <td><input type="button" class="btnNum" value=")" onclick="addChar(this.form.display,')')"></td>
+        <td><input type="button" class="btnNum" name="btnTop" value="DEL" onclick="deleteChar(this.form.display)"></td>
     </tr>
    
 
 </table>
 </form>
 <script>
+btLimpar.addEventListener("click", limparCampos);
+function limparCampos(){
+    display.value = "";
+    display.focus();
+}
 
 function addChar(input, character) {
 if(input.value == null || input.value == "0")
